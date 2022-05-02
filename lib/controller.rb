@@ -1,10 +1,12 @@
 require 'gossip'
 
 class ApplicationController < Sinatra::Base
+  # HOME
   get '/' do
     erb :index, locals: {gossips: Gossip.all}
   end
-
+  
+  # NEW GOSSIP
   get '/gossips/new/' do
     erb :new_gossip
   end
@@ -14,10 +16,12 @@ class ApplicationController < Sinatra::Base
     redirect '/'
   end
 
+  # DYNAMIC GOSSIP
   get '/gossips/:id' do
     erb :show, locals: {gossip: Gossip.find("#{params['id']}"), identifiant: "#{params['id']}"}
   end
 
+  # EDIT GOSSIP
   get '/gossips/:id/edit' do
     erb :edit, locals: {identifiant: "#{params['id']}"}
   end
